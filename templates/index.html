@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube Search Results Scraper API</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico" />
+    <meta name="description" content="Free Rest API to scrape YouTube search results" />
+    <meta name="keywords" content="YouTube, Search, Scraper, API" />
+    <meta name="author" content="Akshat Developer" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              yt: {
+                bg: "#0f0f0f",
+                text: "#f1f1f1",
+                red: "#ff0000",
+                "dark-red": "#cc0000",
+                gray: "#272727",
+                "light-gray": "#373737",
+              },
+            },
+          },
+          fontFamily: {
+            body: ["Roboto", "Arial", "sans-serif"],
+            sans: ["Roboto", "Arial", "sans-serif"],
+          },
+        },
+      };
+    </script>
+    <style>
+      #linkCont {
+        transition: all ease 0.2s;
+      }
+
+      #linkCont:hover {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      #linkCont a i {
+        transition: all ease 0.5s;
+      }
+
+      #linkCont a i:hover {
+        transform: scale(0.8);
+      }
+      .hover-1 {
+        --c: red; /* the color */
+        --s: 0.15em;
+
+        line-height: 1.1em;
+        padding-bottom: calc(2.1 * var(--s));
+        background: conic-gradient(from 135deg at top, var(--c) 90deg, #0000 0)
+            left 0 bottom var(--s) / calc(2 * var(--s)) var(--s) repeat-x,
+          conic-gradient(from -45deg at bottom, var(--c) 90deg, #0000 0) left
+            var(--s) bottom 0 / calc(2 * var(--s)) var(--s) repeat-x;
+        -webkit-mask: linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0) 0 / var(--_p, 0%) padding-box no-repeat;
+        transition: 0.5s;
+      }
+      .hover-1:hover {
+        --_p: 100%;
+        color: var(--c);
+      }
+
+      h2 a{
+        transition: margin-right ease 0.5s;
+      }
+
+      h2 a:hover {
+        margin-right: 20px;
+      }
+
+    </style>
+  </head>
+  <body class="bg-yt-bg text-yt-text font-body">
+    <header style="border-bottom: 1px solid #ff0000" class="">
+      <div
+        class="max-w-screen-xl flex flex-col sm:flex-row items-center justify-between mx-auto p-4"
+      >
+        <a href="#" class="flex items-center flex-col mb-2 sm:mb-0">
+          <span
+            class="self-center text-2xl font-semibold whitespace-nowrap text-yt-red"
+            >▷▶ YT Scraper API</span
+          >
+          <span
+              class="self-center text-sm font-regular whitespace-nowrap"
+              >Made with ❤︎  by Akshat Developer</span
+            >
+        </a>
+        <div
+          id="linkCont"
+          style="background-color: #350000; border-radius: 100px"
+          class="flex items-center space-x-4 px-4 py-2"
+        >
+          <a
+            style="color: red"
+            href="https://github.com/yourusername"
+            target="_blank"
+            rel="noopener noreferrer"
+            class=""
+          >
+            <i class="fab fa-github fa-lg"></i>
+            <span class="sr-only">GitHub account</span>
+          </a>
+          <a
+            style="color: red"
+            href="https://yourwebsite.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class=""
+          >
+            <i class="fas fa-globe fa-lg"></i>
+            <span class="sr-only">Personal website</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 antialiased">
+      <div class="flex justify-between px-4 mx-auto max-w-screen-xl">
+        <div class="mx-auto w-full max-w-2xl">
+          <section class="mb-8">
+            <h2
+              class="hover-1 mb-4 text-3xl font-extrabold leading-tight lg:mb-6 lg:text-4xl"
+            >
+              About the API
+            </h2>
+            <p class="text-lg">
+              This free API allows you to scrape YouTube search results. Simply
+              send a GET request with your search query, and receive JSON data
+              containing video information.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2
+              class="hover-1 mb-4 text-3xl font-extrabold leading-tight lg:mb-6 lg:text-4xl"
+            >
+              Sample API Call
+            </h2>
+            <div
+              class="p-4 mb-4 text-sm rounded-lg bg-yt-light-gray overflow-x-auto"
+              role="alert"
+            >
+              <pre
+                class="whitespace-pre-wrap"
+              ><code>GET https://api.example.com/youtube-scraper?q=your+search+query</code></pre>
+            </div>
+          </section>
+
+          <section class="mb-8">
+            <h2
+              class="hover-1 mb-4 text-3xl font-extrabold leading-tight lg:mb-6 lg:text-4xl"
+            >
+              <a href="https://rickroll.com" target="_blank"> Try it out</a> <a>→</a> 
+            </h2>
+            <div id="result" class="mt-4"></div>
+          </section>
+
+          <section>
+            <h2
+              class="hover-1 mb-4 text-3xl font-extrabold leading-tight lg:mb-6 lg:text-4xl"
+            >
+              Disclaimer
+            </h2>
+            <p class="text-base">
+              This API is for educational and personal use only. Please respect
+              YouTube's terms of service and do not use this API for any illegal
+              or unethical purposes. We are not responsible for any misuse of
+              this API.
+            </p>
+          </section>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
